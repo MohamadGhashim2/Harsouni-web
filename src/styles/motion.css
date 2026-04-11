@@ -1,0 +1,63 @@
+@media (prefers-reduced-motion: no-preference) {
+  .animate-fade-up {
+    animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-fade-up-delay {
+    animation: fade-up 1s cubic-bezier(0.22, 1, 0.36, 1) both 0.15s;
+  }
+
+  .animate-float {
+    animation: gentle-float 7s ease-in-out infinite;
+  }
+
+  .animate-sheen {
+    animation: sheen 10s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes gentle-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(0, -10px, 0) rotate(-1deg);
+  }
+}
+
+@keyframes sheen {
+  0% {
+    transform: translateX(-10%);
+    opacity: 0;
+  }
+
+  10%,
+  55% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(65%);
+    opacity: 0;
+  }
+}
