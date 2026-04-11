@@ -25,17 +25,12 @@ export const contactConfig = {
   socialLinks: [
     {
       label: 'Instagram',
-      href: 'https://www.instagram.com/harsouniservices',
+      href: 'https://www.instagram.com/harsouni_services?igsh=dWowdW5jenB0cG1u',
       icon: 'instagram',
     },
     {
-      label: 'Facebook',
-      href: 'https://www.facebook.com/harsouniservices',
-      icon: 'globe',
-    },
-    {
       label: 'WhatsApp',
-      href: 'https://wa.me/905551234567',
+      href: 'https://wa.me/905528964099',
       icon: 'whatsapp',
     },
   ] as const,
