@@ -13,13 +13,13 @@ const majorSectionIds = [
   'contact-section',
 ]
 
-test('page renders with Turkish as the default experience', async ({ page }) => {
+test('page renders with Arabic as the default experience', async ({ page }) => {
   await page.goto('/')
 
-  await expect(page.locator('html')).toHaveAttribute('lang', 'tr')
-  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr')
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ar')
+  await expect(page.locator('html')).toHaveAttribute('dir', 'rtl')
   await expect(page.getByRole('heading', { level: 1 })).toContainText(
-    'Türkiye’de doğru üniversite yolunu birlikte planlayalım.',
+    'لنرسم معاً طريق الجامعة المناسبة في تركيا.',
   )
 })
 
@@ -62,10 +62,10 @@ test('services carousel renders and auto-advances every five seconds', async ({ 
   )
 })
 
-test.describe('browser language detection', () => {
+test.describe('browser language detection for Arabic devices', () => {
   test.use({ locale: 'ar-SA' })
 
-  test('switches to Arabic and applies RTL automatically', async ({ page }) => {
+  test('keeps Arabic and applies RTL automatically', async ({ page }) => {
     await page.goto('/')
 
     await expect(page.locator('html')).toHaveAttribute('lang', 'ar')
@@ -76,18 +76,32 @@ test.describe('browser language detection', () => {
   })
 })
 
+test.describe('browser language detection for Turkish devices', () => {
+  test.use({ locale: 'tr-TR' })
+
+  test('switches to Turkish automatically', async ({ page }) => {
+    await page.goto('/')
+
+    await expect(page.locator('html')).toHaveAttribute('lang', 'tr')
+    await expect(page.locator('html')).toHaveAttribute('dir', 'ltr')
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(
+      'Türkiye’de doğru üniversite yolunu birlikte planlayalım.',
+    )
+  })
+})
+
 test('language switcher updates locale and persists the choice', async ({ page }) => {
   await page.goto('/')
 
-  await page.getByTestId('locale-ar').click()
+  await page.getByTestId('locale-tr').click()
 
-  await expect(page.locator('html')).toHaveAttribute('lang', 'ar')
-  await expect(page.locator('html')).toHaveAttribute('dir', 'rtl')
+  await expect(page.locator('html')).toHaveAttribute('lang', 'tr')
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr')
   await expect
     .poll(() =>
       page.evaluate((key) => window.localStorage.getItem(key), siteConfig.localeStorageKey),
     )
-    .toBe('ar')
+    .toBe('tr')
 })
 
 test('sticky WhatsApp button uses the configured number', async ({ page }) => {

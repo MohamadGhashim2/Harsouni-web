@@ -20,9 +20,9 @@ export const getLocaleDirection = (locale: Locale) => localeDirections[locale]
 export const getLocaleFromLanguage = (language: string | undefined) => {
   const normalized = language?.toLowerCase() ?? ''
 
-  if (normalized.startsWith('ar')) {
-    return 'ar' as Locale
+  if (normalized.startsWith('tr')) {
+    return 'tr' as Locale
   }
 
-  return 'tr' as Locale
+  return 'ar' as Locale
 }
