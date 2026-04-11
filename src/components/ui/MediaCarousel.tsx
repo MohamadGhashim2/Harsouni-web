@@ -4,6 +4,7 @@ import {
   useRef,
   useState,
   type PointerEvent as ReactPointerEvent,
+  type TouchEvent as ReactTouchEvent,
 } from 'react'
 import { cn } from '../../lib/cn'
 
@@ -64,6 +65,7 @@ export const MediaCarousel = ({
   const viewportRef = useRef<HTMLDivElement>(null)
   const pointerIdRef = useRef<number | null>(null)
   const isDraggingRef = useRef(false)
+  const touchSettleTimeoutRef = useRef<number | null>(null)
   const dragStartXRef = useRef(0)
   const dragStartScrollLeftRef = useRef(0)
 
@@ -213,12 +215,23 @@ export const MediaCarousel = ({
     }
   }
 
+  const clearTouchSettleTimeout = () => {
+    if (touchSettleTimeoutRef.current !== null) {
+      window.clearTimeout(touchSettleTimeoutRef.current)
+      touchSettleTimeoutRef.current = null
+    }
+  }
+
   const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (items.length <= 1) {
       return
     }
 
-    if (event.pointerType === 'mouse' && event.button !== 0) {
+    if (event.pointerType !== 'mouse') {
+      return
+    }
+
+    if (event.button !== 0) {
       return
     }
 
@@ -255,6 +268,27 @@ export const MediaCarousel = ({
     syncActiveIndex()
   }
 
+  const handleTouchStart = (_event: ReactTouchEvent<HTMLDivElement>) => {
+    if (items.length <= 1) {
+      return
+    }
+
+    clearTouchSettleTimeout()
+    setIsDragging(true)
+  }
+
+  const handleTouchEnd = () => {
+    if (items.length <= 1) {
+      return
+    }
+
+    clearTouchSettleTimeout()
+    touchSettleTimeoutRef.current = window.setTimeout(() => {
+      setIsDragging(false)
+      settleAtNearestSlide()
+    }, 120)
+  }
+
   const endDrag = (pointerId: number) => {
     if (pointerIdRef.current !== pointerId) {
       return
@@ -273,6 +307,13 @@ export const MediaCarousel = ({
     setIsDragging(false)
     settleAtNearestSlide()
   }
+
+  useEffect(
+    () => () => {
+      clearTouchSettleTimeout()
+    },
+    [],
+  )
 
   return (
     <div
@@ -293,7 +334,7 @@ export const MediaCarousel = ({
           </div>
 
           {items.length > 1 ? (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" dir="ltr">
               <button
                 aria-label={labels.previousLabel}
                 className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-brand-200)] bg-white text-[var(--color-ink-900)] transition hover:border-[var(--color-brand-400)] hover:bg-[var(--color-brand-50)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand-500)]"
@@ -332,8 +373,11 @@ export const MediaCarousel = ({
             onPointerMove={handlePointerMove}
             onPointerUp={(event) => endDrag(event.pointerId)}
             onScroll={syncActiveIndex}
+            onTouchCancel={handleTouchEnd}
+            onTouchEnd={handleTouchEnd}
+            onTouchStart={handleTouchStart}
             ref={viewportRef}
-            style={{ touchAction: 'pan-y' }}
+            style={{ touchAction: 'pan-x pan-y' }}
           >
             {items.map((item, index) => (
               <div
@@ -341,7 +385,7 @@ export const MediaCarousel = ({
                 data-testid={`${testId}-slide-${index}`}
                 key={`${item.src}-${index}`}
               >
-                <div className="rounded-[28px] border border-[rgba(36,19,0,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,247,235,0.94))] p-1.5 sm:p-2">
+                <div className="rounded-[28px] border border-[rgba(36,19,0,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,247,235,0.94))] p-1.5 transition-transform duration-300 sm:scale-[1.02] sm:p-2">
                   <img
                     alt={item.alt}
                     className="aspect-[3/4] w-full rounded-[22px] object-cover shadow-[0_18px_60px_rgba(36,19,0,0.16)]"

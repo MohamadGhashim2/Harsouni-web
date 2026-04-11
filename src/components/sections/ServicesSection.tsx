@@ -34,7 +34,7 @@ export const ServicesSection = ({ content }: ServicesSectionProps) => {
 
           <MediaCarousel
             autoAdvanceMs={siteConfig.motion.servicesCarouselAutoplayMs}
-            className="mx-auto max-w-[20rem] sm:max-w-[24rem] lg:max-w-[28rem]"
+            className="mx-auto max-w-[20.75rem] sm:max-w-[24.75rem] lg:max-w-[28.75rem]"
             items={carouselItems}
             labels={carouselLabels}
             testId="services-carousel"
