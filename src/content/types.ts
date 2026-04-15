@@ -116,6 +116,8 @@ export interface LandingContent {
     quickLinksLabel: string
     contactLabel: string
     rightsSuffix: string
+    creditPrefix: string
+    creditAriaLabel: string
   }
   stickyWhatsappLabel: string
   accessibility: {

@@ -3,6 +3,10 @@ import { Container } from '../ui/Container'
 
 interface FooterProps {
   contactLabel: string
+  creditAriaLabel: string
+  creditHref: string
+  creditName: string
+  creditPrefix: string
   email: string
   navigationItems: Array<{
     href: string
@@ -23,6 +27,10 @@ interface FooterProps {
 
 export const Footer = ({
   contactLabel,
+  creditAriaLabel,
+  creditHref,
+  creditName,
+  creditPrefix,
   email,
   navigationItems,
   quickLinksLabel,
@@ -83,9 +91,23 @@ export const Footer = ({
       </div>
     </Container>
     <Container className="border-t border-[var(--color-brand-100)] py-5">
-      <p className="text-sm text-[var(--color-ink-500)]">
-        {new Date().getFullYear()} {siteName}. {rightsSuffix}
-      </p>
+      <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+        <p className="text-sm text-[var(--color-ink-500)]">
+          {new Date().getFullYear()} {siteName}. {rightsSuffix}
+        </p>
+        <p className="text-sm text-[var(--color-ink-500)]">
+          <span>{creditPrefix} </span>
+          <a
+            aria-label={creditAriaLabel}
+            className="font-semibold text-[var(--color-brand-700)] underline decoration-[var(--color-brand-400)] underline-offset-4 transition hover:text-[var(--color-brand-800)]"
+            href={creditHref}
+            rel="noreferrer"
+            target="_blank"
+          >
+            {creditName}
+          </a>
+        </p>
+      </div>
     </Container>
   </footer>
 )

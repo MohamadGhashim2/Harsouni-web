@@ -102,6 +102,10 @@ export const HomePage = ({
 
       <Footer
         contactLabel={content.footer.contactLabel}
+        creditAriaLabel={content.footer.creditAriaLabel}
+        creditHref={siteConfig.creator.instagramUrl}
+        creditName={siteConfig.creator.name}
+        creditPrefix={content.footer.creditPrefix}
         email={contact.email}
         navigationItems={navigationItems}
         quickLinksLabel={content.footer.quickLinksLabel}

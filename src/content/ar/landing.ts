@@ -252,6 +252,8 @@ export const landingContentAr: LandingContent = {
     quickLinksLabel: 'روابط سريعة',
     contactLabel: 'معلومات التواصل',
     rightsSuffix: 'جميع الحقوق محفوظة.',
+    creditPrefix: 'Powered by',
+    creditAriaLabel: 'افتح حساب Mohamad Ghashim على إنستغرام',
   },
   stickyWhatsappLabel: 'اتصل الآن',
   accessibility: {

@@ -22,6 +22,10 @@ export const siteConfig = {
     tr: 'Türkiye üniversitelerine yönelik başvuru, bölüm seçimi ve kayıt danışmanlığı.',
     ar: 'خدمات التقديم الجامعي واختيار التخصص والتسجيل للجامعات في تركيا.',
   },
+  creator: {
+    name: 'Mohamad Ghashim',
+    instagramUrl: 'https://www.instagram.com/m_gshim/',
+  },
   motion: {
     servicesCarouselAutoplayMs: 5000,
   },
