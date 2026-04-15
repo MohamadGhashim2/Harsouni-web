@@ -253,7 +253,7 @@ export const landingContentTr: LandingContent = {
     quickLinksLabel: 'Hızlı bağlantılar',
     contactLabel: 'İletişim',
     rightsSuffix: 'Tüm hakları saklıdır.',
-    creditPrefix: 'Powered by',
+    creditPrefix: 'Designed & developed by',
     creditAriaLabel: 'Mohamad Ghashim Instagram hesabını aç',
   },
   stickyWhatsappLabel: 'Şimdi Ara',
