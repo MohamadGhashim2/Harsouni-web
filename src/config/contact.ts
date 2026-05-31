@@ -2,16 +2,16 @@ import type { Locale } from '../lib/locale'
 
 export const contactConfig = {
   whatsapp: {
-    number: '905528964099',
-    display: '+90 5528964099',
+    number: '905513504099',
+    display: '+90 5513504099',
     defaultMessage: {
       tr: 'Merhaba, üniversite danışmanlığı hizmetleriniz hakkında bilgi almak istiyorum.',
       ar: 'مرحباً، أود الحصول على معلومات حول خدماتكم في الإرشاد الجامعي.',
     } satisfies Record<Locale, string>,
   },
   phone: {
-    display: '+90 552 896 40 99',
-    e164: '+905528964099',
+    display: '+90 551 350 40 99',
+    e164: '+905513504099',
   },
   email: 'harsouniservices@gmail.com',
   address: {
@@ -30,7 +30,7 @@ export const contactConfig = {
     },
     {
       label: 'WhatsApp',
-      href: 'https://wa.me/905528964099',
+      href: 'https://wa.me/905513504099',
       icon: 'whatsapp',
     },
   ] as const,
